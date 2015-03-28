@@ -1,0 +1,81 @@
+<?php
+/**
+ * @var $this D3w_Album_Block_Photo
+ * @see D3w_Album_Block_Photo
+ */
+
+?>
+
+<?php $_albumPhoto = $this->helper('d3w_album')->getAlbumPhotoInstance(); ?>
+<?php $_commentsPhoto = $this->helper('d3w_album')->getAlbumCommentsInstance(); ?>
+
+
+<div id="album_item_messages"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="page-title">
+
+    <h1><?php echo $this->escapeHtml($_albumPhoto->getTitle()) ?></h1>
+    <div class="album_photo_subtitle">
+
+        <?php echo $this->formatDate($_albumPhoto->getTimePublished(),
+            Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM) ?>|
+        <h2><?php echo $this->escapeHtml($_albumPhoto->getPhoto_name()) ?></h2>
+    </div>
+</div>
+<div class="album_photo_view">
+    <?php if ($imageUrl = $this->getImageUrl($_albumPhoto, 600)): ?>
+        <p><img src="<?php echo $imageUrl ?>" alt="<?php echo $this->escapeHtml($_albumPhoto->getTitle())
+            ?>" /></p>
+    <?php endif; ?>
+    <div class="news_item_content"><?php echo $_albumPhoto->getContent() ?></div>
+    <div class="pager">
+        <a href="<?php echo $this->getBackUrl() ?>">
+            <?php echo Mage::helper('magentostudy_news')->__('Return to list') ?>
+        </a>
+    </div>
+    <?php Mage::register('d3w_album_photo_back', $this->getBackUrl()); ?>
+
+    <br>
+<div class="album_photo_comments">
+
+        <?php foreach ($_commentsPhoto as $comment): ?>
+            <p class="availability in-stock">
+            <b>
+                <span class="value">
+                    <?php echo $this->escapeHtml($comment->getUsername()); ?>
+                </span>
+
+            </b>
+            :
+            <i>
+            <?php echo $this->escapeHtml($comment->getTime_created()); ?>
+            </i>
+            </p>
+            <?php echo $this->escapeHtml($comment->getContent()); ?>
+            <br>
+        <?php endforeach; ?>
+
+        </div>
+    <br>
+    <div>
+
+        <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="form-validate">
+            <input type="hidden" name="photo_id" value="<?php echo $_albumPhoto->getPhoto_id() ?>" />
+
+                <label for="email_address" class="required"><em>*</em><?php echo $this->__('Username') ?></label>
+                <div class="input-box">
+                    <input type="text" name="username" id="username" title="<?php echo $this->__('Username') ?>" class="input-text validate-email required-entry" />
+                </div>
+            <label for="email_address" class="required"><em>*</em><?php echo $this->__('Comment') ?></label>
+                <div class="input-box">
+                    <textarea  id="content" name="content" title="<?php echo $this->__('Comment') ?>" class="required-entry input-text" /></textarea>
+                </div>
+            <div class="buttons">
+                <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+
+                <button type="submit" title="<?php echo $this->__('Submit') ?>" class="button"><span><span><?php echo $this->__('Submit') ?></span></span></button>
+            </div>
+            </form>
+
+
+    </div>
+</div>

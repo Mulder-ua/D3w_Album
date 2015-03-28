@@ -1,0 +1,36 @@
+<?php
+/**
+ * @var $this D3w_Album_Block_List
+ * @see Magentostudy_News_Block_List
+ */
+?>
+    <div id="album_list_messages"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+    <div class="page-title">
+        <h1><?php echo Mage::helper('d3w_album')->__('Album') ?></h1>
+    </div>
+    <div class="album_list_view">
+        <?php foreach ($this->getCollection() as $albumPhoto): ?>
+            <div id="photo_<?php echo $albumPhoto->getPhoto_id() ?>" class="album_list_photo">
+                <h2>
+                    <a href="<?php echo $this->getPhotoUrl($albumPhoto) ?>">
+                        <?php echo $this->escapeHtml($albumPhoto->getPhoto_name()) ?>
+                    </a>
+
+                </h2>
+                <div class="album_item_subtitle">
+                    <?php echo $this->formatDate($albumPhoto->getTime_created(), 'medium') ?>
+                </div>
+                <?php if ($imageUrl = $this->getImageUrl($albumPhoto, 400)): ?>
+
+                    <p>
+                        <a href="<?php echo $this->getPhotoUrl($albumPhoto) ?>">
+                        <img src="<?php echo $imageUrl ?>" alt="<?php echo
+                        $this->escapeHtml($albumPhoto->getPhoto_name()); ?>" /></a>
+
+                    </p>
+                <?php endif; ?>
+            </div>
+            <br>
+        <?php endforeach; ?>
+    </div>
+<?php echo $this->getPager() ?>
