@@ -67,25 +67,4 @@ class D3w_Album_Helper_Data extends Mage_Core_Helper_Abstract
     {
         return $this->_getUrl('album/index/addcomment');
     }
-
-    public function addComment()
-    {
-        $formData = Mage::registry("d3w_album_addcomment");
-        $model = Mage::registry("d3w_album_model");
-
-        if ($formData['photo_id'] && $formData['username'] && $formData['content'])
-        {
-            $data = array('photo_id'=>$formData['photo_id'],'username'=>$formData['username'],'content'=>$formData['content']);
-            $model->setData($data);
-            try {
-                $model->save()->getId();
-                return true;
-            } catch (Exception $e){
-                echo $e->getMessage();
-            }
-        }else {
-            return false;
-        }
-    }
-
 }

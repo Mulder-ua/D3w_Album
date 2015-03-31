@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento admin config
+ *
+ * @author Magento
+ */
+-->
+<config>
+    <menu>
+        <album translate="title" module="d3w_album">
+            <title>Album</title>
+            <sort_order>99</sort_order>
+            <children>
+                <manage translate="title" module="d3w_album">
+                    <title>Manage Album</title>
+                    <action>adminhtml/album</action>
+                    <sort_order>64</sort_order>
+                </manage>
+            </children>
+            <children>
+                <comments translate="title" module="d3w_album">
+                    <title>Manage Comments</title>
+                    <action>adminhtml/album/comments</action>
+                    <sort_order>65</sort_order>
+                </comments>
+            </children>
+        </album>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <album translate="title" module="d3w_album">
+                        <title>Album</title>
+                        <sort_order>64</sort_order>
+                        <children>
+                            <manage translate="title">
+                                <title>Manage Album</title>
+                                <sort_order>0</sort_order>
+                                <children>
+                                    <save translate="title">
+                                        <title>Save News</title>
+                                        <sort_order>0</sort_order>
+                                    </save>
+                                    <delete translate="title">
+                                        <title>Delete News</title>
+                                        <sort_order>9</sort_order>
+                                    </delete>
+                                </children>
+                            </manage>
+                        </children>
+                    </album>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <album translate="title" module="d3w_album">
+                                        <title>Album Management</title>
+                                    </album>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

@@ -40,9 +40,6 @@ class D3w_Album_IndexController extends Mage_Core_Controller_Front_Action
         $model->load($itemId);
         $modelComments = Mage::getModel('d3w_album/comment')->getCollection()->addFilter('photo_id', $itemId);
 
-
-
-
         if (!$model->getId()) {
             return $this->_forward('noRoute');
         }
@@ -62,12 +59,24 @@ class D3w_Album_IndexController extends Mage_Core_Controller_Front_Action
 
     public function addcommentAction()
     {
-        $backUrl = $this->_getRefererUrl();
-        $formData = $this->getRequest()->getPost();
-        $model = Mage::getModel('d3w_album/comment');
-        Mage::register("d3w_album_addcomment", $formData);
-        Mage::register("d3w_album_model", $model);
-        Mage::helper('d3w_album')->addComment();
-        return $this->_redirectUrl($backUrl);
+        $data = [
+            'photo_id' => $this->_request->getParam('photo_id'),
+            'username' => $this->_request->getParam('username'),
+            'content' => $this->_request->getParam('content'),
+        ];
+        /** @var Mage_Core_Model_Session $session */
+        $session = Mage::getSingleton('core/session');
+        /** @var Mage_Core_Model_Abstract $comment */
+        $comment = Mage::getModel('d3w_album/comment');
+        $comment->setData($data);
+
+        try {
+            $comment->save();
+        } catch (Mage_Core_Exception $e) {
+            $session->addError($e->getMessage());
+        } catch (Exception $e) {
+            $session->addException($e, $this->__('An error occurred while adding comment.'));
+        }
+        return $this->_redirectReferer();
     }
 }

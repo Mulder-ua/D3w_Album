@@ -60,4 +60,24 @@
             </updates>
         </layout>
     </frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <D3w_Album before="Mage_Adminhtml">D3w_Album_Adminhtml</D3w_Album>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <album>
+                    <file>album.xml</file>
+                </album>
+            </updates>
+        </layout>
+    </adminhtml>
 </config>

@@ -11,4 +11,12 @@ class D3w_Album_Model_Comment extends Mage_Core_Model_Abstract
     {
         $this->_init('d3w_album/comment');
     }
+
+    protected function _beforeSave()
+    {
+        if (!$this->getUsername() || !$this->getPhoto_id() || !$this->getContent()) {
+            Mage::throwException(Mage::helper('d3w_album')->__('All fields have to be filled.'));
+        }
+        parent::_beforeSave();
+    }
 }

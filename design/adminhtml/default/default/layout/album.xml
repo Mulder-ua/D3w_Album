@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento backend layout
+ *
+ * @author Magento
+ */
+-->
+<layout>
+    <adminhtml_album_index>
+        <reference name="content">
+            <block type="d3w_album/adminhtml_album" name="d3w_album" />
+        </reference>
+    </adminhtml_album_index>
+
+    <adminhtml_album_grid>
+        <block type="d3w_album/adminhtml_album_grid" name="root"/>
+    </adminhtml_album_grid>
+
+    <adminhtml_album_edit>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="d3w_album/adminhtml_photo_edit" name="d3w_photo.edit">
+                <block type="d3w_album/adminhtml_photo_edit_form" name="form" />
+            </block>
+        </reference>
+    </adminhtml_album_edit>
+
+    <adminhtml_album_deletephoto>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="d3w_album/adminhtml_photo_delete" name="d3w_photo.delete">
+                <block type="d3w_album/adminhtml_photo_delete_form" name="form" />
+            </block>
+        </reference>
+    </adminhtml_album_deletephoto>
+
+
+
+</layout>
